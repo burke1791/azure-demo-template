@@ -1,5 +1,5 @@
 @allowed([
-  'Dev'
+  'Test'
   'Stage'
   'Prod'
 ])
@@ -20,6 +20,14 @@ module storageAccount 'modules/storage.bicep' = {
   }
 }
 
+module vnet 'modules/vnet.bicep' = {
+  name: 'vnet'
+  params: {
+    env: env
+    location: location
+  }
+}
+
 module synapse 'modules/synapse.bicep' = {
   name: 'synapse'
   params: {
@@ -28,6 +36,7 @@ module synapse 'modules/synapse.bicep' = {
     sqlAdminPassword: sqlAdminPassword
     dataLakeUrl: storageAccount.outputs.endpoint
     dataLakeResourceId: storageAccount.outputs.resourceId
+    vnetId: vnet.outputs.id
   }
 }
 
@@ -37,5 +46,16 @@ module keyvault 'modules/keyvault.bicep' = {
     env: env
     synapsePrincipalId: synapse.outputs.principalId
     location: location
+    subnetId: vnet.outputs.subnetId
+  }
+}
+
+module postgres 'modules/postgres.bicep' = {
+  name: 'postgres'
+  params: {
+    env: env
+    location: location
+    vNetSubnetId: vnet.outputs.subnetId
+    adminPW: sqlAdminPassword
   }
 }
