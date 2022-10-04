@@ -17,3 +17,9 @@
   1. postgres
     1. You will need to enable interactive authoring in the integration runtime in order to test the connection
     1. SSL is required
+
+
+## Needs For Demo
+
+1. Snowflake connection via private endpoint
+  1. [Source](https://docs.snowflake.com/en/user-guide/privatelink-azure.html)
