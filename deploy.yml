@@ -16,7 +16,7 @@ pool:
 steps:
   - task: AzureCLI@2
     inputs:
-      azureSubscription: Github
+      azureSubscription: 'az test'
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |
