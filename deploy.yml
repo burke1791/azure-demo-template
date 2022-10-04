@@ -3,7 +3,7 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   branches:
     include:
-      - stage
+      - master
 
 variables:
   - name: templateFile
