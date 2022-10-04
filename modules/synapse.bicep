@@ -8,7 +8,7 @@ param location string = resourceGroup().location
 param sqlAdminPassword string
 
 resource synapse 'Microsoft.Synapse/workspaces@2021-06-01' = {
-  name: 'hpwarehouse-${toLower(env)}'
+  name: 'burkewarehouse-${toLower(env)}'
   location: location
   identity: {
     type: 'SystemAssigned'
