@@ -3,11 +3,13 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   branches:
     include:
-      - master
+      - test
 
 variables:
   - name: templateFile
     value: 'main.bicep'
+  - name: serviceConnection
+    value: 'az test'
   - group: DWH ARM Test
 
 pool:
@@ -16,7 +18,7 @@ pool:
 steps:
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'az test'
+      azureSubscription: $(serviceConnection)
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |
